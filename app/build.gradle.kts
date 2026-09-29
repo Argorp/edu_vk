@@ -33,6 +33,9 @@ android {
     buildFeatures {
         compose = true
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.15"  // версия зависит от Kotlin
+    }
 }
 
 dependencies {
