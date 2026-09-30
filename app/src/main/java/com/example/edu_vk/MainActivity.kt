@@ -1,5 +1,6 @@
 package com.example.edu_vk
 
+//import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -88,6 +89,29 @@ fun MainScreen() {
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Позвонить другу")
+        }
+        Button (
+            onClick = {
+                val clean = text.trim()
+                if (clean.isEmpty()) {
+                    Toast.makeText(context, "Отправьте хоть-что нибудь!", Toast.LENGTH_LONG).show()
+                    return@Button
+                }
+                val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_TEXT, clean)
+                }
+                /*val chooser = Intent.createChooser(shareIntent, "Поделиться в...")
+                try {
+                    context.startActivity(shareIntent)
+                } catch (e: ActivityNotFoundException) {
+                    Toast.makeText(context, "Нет приложений для отправки", Toast.LENGTH_SHORT).show()
+                }*/
+                context.startActivity(shareIntent)
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Поделиться текстом")
         }
     }
 }
