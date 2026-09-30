@@ -12,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 
 
 class MainActivity : ComponentActivity() {
@@ -64,6 +65,29 @@ fun MainScreen() {
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Открыть вторую Activity")
+        }
+        Button(
+            // TODO: добавить возможность переводить 8... на +7...
+            onClick = {
+                val fix = text.trim()
+                if (fix.isEmpty() || !fix.startsWith("+7")) {
+                    Toast.makeText(context, "Введите корректный номер телефона", Toast.LENGTH_SHORT).show()
+                    return@Button
+                }
+                val dialIntent = Intent(Intent.ACTION_DIAL).apply {
+                    data = "tel:$fix".toUri()
+                }
+                if (dialIntent.resolveActivity(context.packageManager) != null) {
+                    context.startActivity(dialIntent)
+                }
+                else {
+                    Toast.makeText(context, "Нет приложения для звонков", Toast.LENGTH_SHORT).show()
+                }
+                context.startActivity(dialIntent)
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Позвонить другу")
         }
     }
 }
