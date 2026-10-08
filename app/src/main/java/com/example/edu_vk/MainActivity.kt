@@ -1,4 +1,4 @@
-package com.example.applist
+package com.example.edu_vk
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
