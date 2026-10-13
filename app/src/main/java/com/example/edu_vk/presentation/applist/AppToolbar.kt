@@ -1,4 +1,4 @@
-package com.example.edu_vk.ui.theme
+package com.example.edu_vk.presentation.applist
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Apps

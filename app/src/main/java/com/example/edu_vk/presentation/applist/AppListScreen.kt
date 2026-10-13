@@ -7,7 +7,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.edu_vk.data.samplesApp
-import com.example.edu_vk.ui.theme.AppToolbar
+import com.example.edu_vk.presentation.applist.AppToolbar
 
 @Composable
 fun AppListScreen() {
