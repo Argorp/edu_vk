@@ -1,4 +1,4 @@
-package com.example.applist.ui
+package com.example.edu_vk.presentation.applist
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -7,20 +7,26 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.edu_vk.data.samplesApp
-import com.example.edu_vk.presentation.applist.AppToolbar
 
 @Composable
-fun AppListScreen() {
+fun AppListScreen(
+    onClick: () -> Unit,
+    modifier: Modifier
+) {
     Scaffold(
         topBar = { AppToolbar() },
-        modifier = Modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize(),
     ) { innerPadding ->
         LazyColumn(
-            modifier = Modifier.fillMaxSize(),
+            modifier = modifier.fillMaxSize(),
             contentPadding = innerPadding
         ) {
             items(samplesApp, key = { it.id }) { app ->
-                AppListItem(app)
+                AppListItem(
+                    app,
+                    onClick = onClick,
+                    modifier = modifier
+                )
             }
         }
     }

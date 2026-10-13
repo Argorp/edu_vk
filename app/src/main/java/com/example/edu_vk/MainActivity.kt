@@ -9,7 +9,8 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.isSystemInDarkTheme
-import com.example.applist.ui.AppListScreen
+import com.example.edu_vk.presentation.appdetails.AppDetailsScreen
+import com.example.edu_vk.presentation.applist.AppListScreen
 
 private val Accent = Color(0xFF6750A4)
 private val AccentDark = Color(0xFFB69DF8)
@@ -23,7 +24,7 @@ class MainActivity : ComponentActivity() {
             val colors = if (isSystemInDarkTheme()) DarkColors else LightColors
             MaterialTheme(colorScheme = colors) {
                 Surface {
-                    AppListScreen()
+                    AppDetailsScreen()
                 }
             }
         }
