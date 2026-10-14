@@ -15,14 +15,15 @@ import com.example.edu_vk.model.Category
 
 @Composable
 fun AppDetailsScreen(
-    onBackClick: () -> Unit = {},
-    onShowcaseAppClick: (String) -> Unit = {},
+    appId: Int,
+    onBackClick: () -> Unit,
+    onShowcaseAppClick: (Int) -> Unit,
 ) {
     // ─── ФИКТИВНЫЕ ДАННЫЕ ДЛЯ ЭТАПА 2 ───
     val fakeContent = AppDetailsState.Content(
         appDetails = AppDetails(
-            id = "1",
-            name = "Тестовое приложение",
+            id = appId.toString(),
+            name = "приложение #$appId",
             developer = "Example Dev",
             description = "Описание для проверки вёрстки на этапе 2. " +
                     "Достаточно длинный текст, чтобы увидеть, как выглядит блок.",
@@ -46,6 +47,7 @@ fun AppDetailsScreen(
             onReadMoreClick = { },
             onDeveloperClick = { },
             onSimilarAppDownloadClick = { },
+            onShowcaseAppClick = onShowcaseAppClick,
             modifier = Modifier
                 .fillMaxSize()
                 .safeDrawingPadding()

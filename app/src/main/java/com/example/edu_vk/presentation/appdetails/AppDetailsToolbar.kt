@@ -21,7 +21,7 @@ fun AppDetailsToolbar(
     modifier: Modifier = Modifier,
 ) {
     TopAppBar(
-        title = { Text("Детали приложения") },
+        title = { Text("Витрина") },
         navigationIcon = {
             IconButton(onClick = onBackClick) {
                 Icon(

@@ -8,9 +8,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
-import androidx.compose.foundation.isSystemInDarkTheme
-import com.example.edu_vk.presentation.appdetails.AppDetailsScreen
-import com.example.edu_vk.presentation.applist.AppListScreen
+import androidx.navigation.compose.rememberNavController
+import com.example.edu_vk.navigation.AppNavHost
 
 private val Accent = Color(0xFF6750A4)
 private val AccentDark = Color(0xFFB69DF8)
@@ -21,10 +20,12 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val colors = if (isSystemInDarkTheme()) DarkColors else LightColors
+            //val colors = if (isSystemInDarkTheme()) DarkColors else LightColors
+            val colors = LightColors
             MaterialTheme(colorScheme = colors) {
                 Surface {
-                    AppDetailsScreen()
+                    val navController = rememberNavController()
+                    AppNavHost(navController = navController)
                 }
             }
         }

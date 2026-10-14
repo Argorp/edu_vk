@@ -3,6 +3,7 @@ package com.example.edu_vk.presentation.appdetails
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -19,6 +20,7 @@ fun AppDetailsContent(
     onInstallClick: () -> Unit,
     onReadMoreClick: () -> Unit,
     onDeveloperClick: () -> Unit,
+    onShowcaseAppClick: (Int) -> Unit,
     onSimilarAppDownloadClick: (SimilarApp) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -86,13 +88,11 @@ fun AppDetailsContent(
         )
         */
 
-        // ─────────────────────────────────────────────
-        // ЭТАП 2: временная проверка витрины
-        // ─────────────────────────────────────────────
+        // ЭТАП 3: блок «Витрина»
         Spacer(Modifier.height(16.dp))
-        AppListItem(
-            app = showcaseApps[0],
-            onClick = { },
+        ShowcaseBlock(
+            onAppClick = onShowcaseAppClick,
+            modifier = Modifier
         )
     }
 }

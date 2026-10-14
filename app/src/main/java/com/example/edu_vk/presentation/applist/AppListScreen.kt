@@ -10,8 +10,8 @@ import com.example.edu_vk.data.samplesApp
 
 @Composable
 fun AppListScreen(
-    onClick: () -> Unit,
-    modifier: Modifier
+    onAppClick: (Int) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Scaffold(
         topBar = { AppToolbar() },
@@ -24,8 +24,7 @@ fun AppListScreen(
             items(samplesApp, key = { it.id }) { app ->
                 AppListItem(
                     app,
-                    onClick = onClick,
-                    modifier = modifier
+                    onClick = { onAppClick(app.id) },
                 )
             }
         }
