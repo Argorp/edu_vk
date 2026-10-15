@@ -63,5 +63,8 @@ enum class Category {
     SHOPPING,
 
     @SerialName("Утилиты")
-    UTILITIES
+    UTILITIES,
+
+    @SerialName("Настройки")
+    SETTINGS
 }

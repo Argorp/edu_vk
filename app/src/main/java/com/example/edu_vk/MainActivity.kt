@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             //val colors = if (isSystemInDarkTheme()) DarkColors else LightColors
-            val colors = LightColors
+            val colors = DarkColors
             MaterialTheme(colorScheme = colors) {
                 Surface {
                     val navController = rememberNavController()
