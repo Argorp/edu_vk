@@ -1,11 +1,17 @@
 package com.example.edu_vk.presentation.appdetails
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -25,45 +31,20 @@ fun AppDetailsContent(
     modifier: Modifier = Modifier,
 ) {
     val appDetails = content.appDetails
-    // val descriptionCollapsed = content.descriptionCollapsed  // ← пока не используется
+    val descriptionCollapsed = content.descriptionCollapsed
 
     Column(modifier.verticalScroll(rememberScrollState())) {
         AppDetailsToolbar(
             onBackClick = onBackClick,
-            onShareClick = onShareClick
+            onShareClick = onShareClick,
         )
 
-        // ─────────────────────────────────────────────
-        // ВРЕМЕННО ЗАКОММЕНТИРОВАНО — вернём, когда
-        // соответствующие компоненты будут реализованы
-        // ─────────────────────────────────────────────
-
-        /*
         Spacer(Modifier.height(8.dp))
         AppDetailsHeader(
             appDetails = appDetails,
             modifier = Modifier.padding(horizontal = 16.dp),
         )
-        Spacer(Modifier.height(16.dp))
-        InstallButton(
-            onClick = onInstallClick,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-        )
-        if (content.similarApps.isNotEmpty()) {
-            Spacer(Modifier.height(12.dp))
-            SimilarApps(
-                apps = content.similarApps,
-                onDownloadClick = onSimilarAppDownloadClick,
-                modifier = Modifier.padding(horizontal = 16.dp),
-            )
-        }
-        Spacer(Modifier.height(12.dp))
-        ScreenshotsList(
-            screenshotUrlList = listOf("1", "2", "3"),
-            contentPadding = PaddingValues(horizontal = 16.dp),
-        )
+
         Spacer(Modifier.height(12.dp))
         AppDescription(
             description = appDetails.description,
@@ -73,26 +54,8 @@ fun AppDetailsContent(
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
         )
-        Spacer(Modifier.height(12.dp))
-        HorizontalDivider(
-            modifier = Modifier.padding(horizontal = 16.dp),
-            color = MaterialTheme.colorScheme.outlineVariant,
-        )
-        Spacer(Modifier.height(12.dp))
-        Developer(
-            name = appDetails.developer,
-            onClick = onDeveloperClick,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp),
-        )
-        */
 
-        // ЭТАП 3: блок «Витрина»
         Spacer(Modifier.height(16.dp))
-        ShowcaseBlock(
-            onAppClick = onShowcaseAppClick,
-            modifier = Modifier
-        )
+        ShowcaseBlock(onAppClick = onShowcaseAppClick, modifier = Modifier)
     }
 }

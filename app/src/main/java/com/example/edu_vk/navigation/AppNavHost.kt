@@ -32,9 +32,12 @@ fun AppNavHost(navController: NavHostController) {
             val appId = entry.arguments?.getInt("appId") ?: 0
             AppDetailsScreen(
                 appId = appId,
-                onBackClick = { navController.popBackStack() },
+                onBackClick = { navController.popBackStack(
+                    route = Screen.AppList.route,
+                    inclusive = false,
+                ) },
                 onShowcaseAppClick = { showcaseAppId ->
-                    navController.navigate(Screen.AppDetails.createRoute(showcaseAppId.toInt()))
+                    navController.navigate(Screen.AppDetails.createRoute(showcaseAppId))
                 },
             )
         }

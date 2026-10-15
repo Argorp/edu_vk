@@ -7,5 +7,7 @@ data class AppInfo (
     val icon: ImageVector,
     val name: String,
     val description: String,
-    val category: String
+    val category: String,
+    val ageRating: Int = 12,
+    val size: Float = 42.6f
 )

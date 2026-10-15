@@ -10,7 +10,5 @@ data class AppDetails(
     val ageRating: Int,
     val size: Float,
     val icon: ImageVector,
-    /*val iconUrl: String,
-    val screenshotUrlList: List<String>?,*/
     val description: String,
 )

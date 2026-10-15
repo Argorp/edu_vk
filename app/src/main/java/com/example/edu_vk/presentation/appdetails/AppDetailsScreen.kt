@@ -10,7 +10,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.example.edu_vk.data.samplesApp
 import com.example.edu_vk.model.AppDetails
+import com.example.edu_vk.model.AppInfo
 import com.example.edu_vk.model.Category
 
 @Composable
@@ -19,28 +21,34 @@ fun AppDetailsScreen(
     onBackClick: () -> Unit,
     onShowcaseAppClick: (Int) -> Unit,
 ) {
-    // ─── ФИКТИВНЫЕ ДАННЫЕ ДЛЯ ЭТАПА 2 ───
-    val fakeContent = AppDetailsState.Content(
-        appDetails = AppDetails(
-            id = appId.toString(),
-            name = "приложение #$appId",
-            developer = "Example Dev",
-            description = "Описание для проверки вёрстки на этапе 2. " +
-                    "Достаточно длинный текст, чтобы увидеть, как выглядит блок.",
-            icon = Icons.Default.Apps,
-            category = Category.BUSINESS,
-            ageRating = 14,
-            size = 145.2f
-        ),
-        descriptionCollapsed = true,
-        similarApps = emptyList(),
-    )
+    //android.util.Log.d("AppDetails", "Открыт appId=$appId")
+    val allApps: List<AppInfo> = (samplesApp + showcaseApps).distinctBy { it.id }
+    val currentApp: AppInfo? = allApps.find {it.id == appId}
+
+    val content: AppDetailsState = if (currentApp != null) {
+        AppDetailsState.Content(
+            appDetails = AppDetails(
+                id = currentApp.id.toString(),
+                name = currentApp.name,
+                developer = "Someone",
+                description = currentApp.description,
+                icon = currentApp.icon,
+                category = Category.ENTERTAINMENT,
+                ageRating = currentApp.ageRating,
+                size = currentApp.size
+            ),
+            descriptionCollapsed = true,
+            similarApps = emptyList()
+        )
+    } else {
+        AppDetailsState.Error
+    }
 
     Scaffold(
         modifier = Modifier.background(MaterialTheme.colorScheme.surface),
     ) { contentPadding ->
         AppDetailsContent(
-            content = fakeContent,
+            content = content as AppDetailsState.Content,
             onBackClick = onBackClick,
             onShareClick = { },
             onInstallClick = { },
