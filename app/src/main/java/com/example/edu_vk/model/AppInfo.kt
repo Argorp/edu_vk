@@ -6,8 +6,9 @@ data class AppInfo (
     val id: Int,
     val icon: ImageVector,
     val name: String,
-    val description: String,
-    val category: String,
+    val shortDescription: String,
+    val fullDescription: String,
+    val category: Category,
     val ageRating: Int = 12,
     val size: Float = 42.6f
 )

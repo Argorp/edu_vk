@@ -1,12 +1,7 @@
 package com.example.edu_vk.presentation.appdetails
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -16,17 +11,19 @@ import com.example.edu_vk.R
 
 @Composable
 fun AppDescription(
-    description: String,
+    shortDescription: String,
+    fullDescription: String,
     collapsed: Boolean,
     onReadMoreClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    android.util.Log.d("Expand", "AppDescription: collapsed=$collapsed, short=${shortDescription.take(20)}, full=${fullDescription.take(20)}")
     Column(modifier) {
         Text(text = stringResource(R.string.app_details_description))
         Spacer(Modifier.height(8.dp))
         Text(
-            text = description,
-            maxLines = if (collapsed) 1 else Int.MAX_VALUE,
+            text = if (collapsed) shortDescription else fullDescription,
+            maxLines = if (collapsed) 3 else Int.MAX_VALUE,
             overflow = TextOverflow.Ellipsis,
         )
         if (collapsed) {

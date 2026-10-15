@@ -13,7 +13,6 @@ import com.example.edu_vk.model.AppInfo
 fun AppListItem(
     app: AppInfo,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
 ) {
     ListItem(
         leadingContent = {
@@ -28,14 +27,15 @@ fun AppListItem(
         supportingContent = {
             Column {
                 Text(
-                    text = app.description,
+                    // TODO: text !!!
+                    text = app.shortDescription,
                     style = MaterialTheme.typography.bodyMedium,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
                 Spacer(Modifier.height(2.dp))
                 Text(
-                    text = app.category,
+                    text = app.category.toString(),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.primary
                 )

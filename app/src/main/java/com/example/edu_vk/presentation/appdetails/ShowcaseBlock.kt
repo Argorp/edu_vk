@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -45,12 +44,10 @@ fun ShowcaseBlock (
             horizontalArrangement = Arrangement.Center
         ) {
             repeat (showcasePages.size) { ind ->
-                val Active = pagerState.currentPage == ind
-                val color: Color
-                if (Active) {
-                    color = MaterialTheme.colorScheme.primary
+                val color: Color = if (pagerState.currentPage == ind) {
+                    MaterialTheme.colorScheme.primary
                 } else {
-                    color = MaterialTheme.colorScheme.outlineVariant
+                    MaterialTheme.colorScheme.outlineVariant
                 }
                 Box(
                     modifier = Modifier
