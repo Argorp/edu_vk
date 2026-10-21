@@ -1,11 +1,9 @@
 package com.example.edu_vk.presentation.applist
 
-import androidx.compose.foundation.clickable
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Apps
+import androidx.compose.material.icons.filled.AppsOutage
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -16,11 +14,12 @@ fun AppToolbar(
     TopAppBar(
         title = { Text("Список приложений") },
         navigationIcon = {
-            Icon(
-                imageVector = Icons.Default.Apps,
-                contentDescription = "Иконка приложения",
-                modifier = Modifier.clickable { onLogoClick() }
+            IconButton(onLogoClick) {
+                Icon(
+                    imageVector = Icons.Default.AppsOutage,
+                    contentDescription = "Ты всё равно это не увидишь..."
                 )
+            }
         },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primary,

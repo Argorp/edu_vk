@@ -1,6 +1,7 @@
 package com.example.edu_vk.presentation.appdetails
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,14 +26,13 @@ fun AppDetailsHeader(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        /*AsyncImage(
-            model = appDetails.iconUrl,
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .size(128.dp)
-                .clip(RoundedCornerShape(16.dp)),
-        )*/
+
+        Icon(
+            imageVector = appDetails.icon,
+            contentDescription = appDetails.name,
+            modifier = Modifier.size(100.dp)
+        )
+
         Spacer(Modifier.width(16.dp))
         Column {
             Text(
