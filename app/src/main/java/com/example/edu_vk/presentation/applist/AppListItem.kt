@@ -1,5 +1,6 @@
-package com.example.applist.ui
+package com.example.edu_vk.presentation.applist
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -9,7 +10,10 @@ import androidx.compose.ui.unit.dp
 import com.example.edu_vk.model.AppInfo
 
 @Composable
-fun AppListItem(app: AppInfo) {
+fun AppListItem(
+    app: AppInfo,
+    onClick: () -> Unit,
+) {
     ListItem(
         leadingContent = {
             Icon(
@@ -23,20 +27,24 @@ fun AppListItem(app: AppInfo) {
         supportingContent = {
             Column {
                 Text(
-                    text = app.description,
+                    // TODO: text !!!
+                    text = app.shortDescription,
                     style = MaterialTheme.typography.bodyMedium,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
                 Spacer(Modifier.height(2.dp))
                 Text(
-                    text = app.category,
+                    text = app.category.toString(),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.primary
                 )
             }
         },
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 2.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 8.dp, vertical = 2.dp)
+            .clickable(onClick = onClick)
     )
     HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
 }
