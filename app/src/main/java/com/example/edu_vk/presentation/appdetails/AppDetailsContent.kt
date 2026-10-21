@@ -18,6 +18,7 @@ fun AppDetailsContent(
     onDeveloperClick: () -> Unit,
     onShowcaseAppClick: (Int) -> Unit,
     onSimilarAppDownloadClick: (SimilarApp) -> Unit,
+    onLogoClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val appDetails = content.appDetails
@@ -33,6 +34,7 @@ fun AppDetailsContent(
         AppDetailsHeader(
             appDetails = appDetails,
             modifier = Modifier.padding(horizontal = 16.dp),
+            onLogoClick = onLogoClick
         )
 
         Spacer(Modifier.height(12.dp))

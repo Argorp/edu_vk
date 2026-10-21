@@ -2,14 +2,12 @@ package com.example.edu_vk.presentation.appdetails
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -24,11 +22,24 @@ fun AppDetailsScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
+    val snackbarHostState = remember { SnackbarHostState() }
+
     LaunchedEffect(appId) {
         viewModel.load(appId)
     }
 
+    LaunchedEffect(Unit) {
+        viewModel.events.collect { event ->
+            when (event) {
+                is AppDetailsEvent.ShowSnackbar -> {
+                    snackbarHostState.showSnackbar(event.message)
+                }
+            }
+        }
+    }
+
     Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) },
         modifier = Modifier.background(MaterialTheme.colorScheme.surface),
     ) { contentPadding ->
         when (val currentState = state) {
@@ -58,6 +69,7 @@ fun AppDetailsScreen(
                     onDeveloperClick = { },
                     onSimilarAppDownloadClick = { },
                     onShowcaseAppClick = onShowcaseAppClick,
+                    onLogoClick = { viewModel.onLogoClick() },
                     modifier = Modifier
                         .fillMaxSize()
                         .safeDrawingPadding()

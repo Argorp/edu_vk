@@ -16,11 +16,13 @@ import com.example.edu_vk.R
 import com.example.edu_vk.model.AppDetails
 import com.example.edu_vk.model.Category
 import kotlin.math.roundToInt
+import androidx.compose.foundation.clickable
 
 @Composable
 fun AppDetailsHeader(
     appDetails: AppDetails,
     modifier: Modifier = Modifier,
+    onLogoClick: () -> Unit,
 ) {
     Row(
         modifier = modifier,
@@ -30,7 +32,7 @@ fun AppDetailsHeader(
         Icon(
             imageVector = appDetails.icon,
             contentDescription = appDetails.name,
-            modifier = Modifier.size(100.dp)
+            modifier = Modifier.size(100.dp).clickable(onClick = onLogoClick)
         )
 
         Spacer(Modifier.width(16.dp))
