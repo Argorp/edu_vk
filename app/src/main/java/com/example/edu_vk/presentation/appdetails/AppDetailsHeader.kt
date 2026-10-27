@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.edu_vk.R
 import com.example.edu_vk.model.AppDetails
-import com.example.edu_vk.model.Category
+import com.example.edu_vk.domain.model.Category
 import kotlin.math.roundToInt
 import androidx.compose.foundation.clickable
 

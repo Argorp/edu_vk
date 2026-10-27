@@ -1,6 +1,7 @@
 package com.example.edu_vk.model
 
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.example.edu_vk.domain.model.Category
 
 data class AppInfo (
     val id: Int,

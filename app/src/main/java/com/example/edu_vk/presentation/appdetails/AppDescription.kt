@@ -30,7 +30,6 @@ fun AppDescription(
             TextButton(
                 onClick = onReadMoreClick,
                 contentPadding = PaddingValues(horizontal = 0.dp),
-                // TODO: Добавить текст для раскрытия по кнопке Больше
             ) {
                 Text(
                     text = stringResource(R.string.app_details_read_more),

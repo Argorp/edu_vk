@@ -11,10 +11,9 @@ import androidx.compose.material.icons.filled.Calculate
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Smartphone
-import com.example.edu_vk.model.Category
+import com.example.edu_vk.domain.model.Category
 
-//TODO: заменить на логичный текст
-val expands = listOf<String>(
+val expands = listOf(
     "Полноценный мессенджер с поддержкой текста, " +
             "голосовых сообщений, видеозвонков и обмена файлами до 2 ГБ. " +
             "Работает в фоне, имеет шифрование end-to-end и синхронизацию " +

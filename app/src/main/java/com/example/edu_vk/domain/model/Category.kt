@@ -1,4 +1,4 @@
-package com.example.edu_vk.model
+package com.example.edu_vk.domain.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
