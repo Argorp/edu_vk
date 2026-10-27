@@ -2,25 +2,22 @@ package com.example.edu_vk.presentation.applist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.edu_vk.data.samplesApp
-import com.example.edu_vk.model.AppInfo
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.asStateFlow
+import com.example.edu_vk.domain.model.App
+import com.example.edu_vk.domain.repository.AppRepositoryImpl
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class AppListViewModel : ViewModel() {
 
-    private val _apps = MutableStateFlow<List<AppInfo>>(emptyList())
-    val apps: StateFlow<List<AppInfo>> = _apps.asStateFlow()
+    private val repo = AppRepositoryImpl()
+
+    private val _apps = MutableStateFlow<List<App>>(emptyList())
+    val apps: StateFlow<List<App>> = _apps.asStateFlow()
     private val _events = MutableSharedFlow<AppListEvent>()
     val events: SharedFlow<AppListEvent> = _events.asSharedFlow()
 
     init {
-        _apps.value = samplesApp
+        _apps.value = repo.getAllApps()
     }
 
     fun onLogoClick() {

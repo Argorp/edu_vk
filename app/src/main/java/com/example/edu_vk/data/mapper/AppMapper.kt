@@ -18,8 +18,8 @@ fun AppDto.toDomain() : App {
     )
 }
 
-private fun transfer(s: String): Category {
-    return when (s) {
+private fun transfer(categoryString: String): Category {
+    return when (categoryString) {
         "Социальные" -> Category.SOCIAL
         "Фото и видео" -> Category.PHOTOGRAPHY
         "Медиа" -> Category.MUSIC

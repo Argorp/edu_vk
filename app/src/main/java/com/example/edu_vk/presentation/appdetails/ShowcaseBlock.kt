@@ -29,7 +29,7 @@ fun ShowcaseBlock (
                     .padding(horizontal = 4.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                showcasePages[page].forEach { it ->
+                showcasePages[page].forEach {
                     AppListItem(
                         app = it,
                         onClick = {onAppClick(it.id)}

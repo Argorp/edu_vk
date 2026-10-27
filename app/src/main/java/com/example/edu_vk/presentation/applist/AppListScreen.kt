@@ -3,14 +3,8 @@ package com.example.edu_vk.presentation.applist
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 
@@ -23,7 +17,6 @@ fun AppListScreen(
     val apps by viewModel.apps.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
 
-    // Слушаем события для показа Snackbar
     LaunchedEffect(Unit) {
         viewModel.events.collect { event ->
             when (event) {

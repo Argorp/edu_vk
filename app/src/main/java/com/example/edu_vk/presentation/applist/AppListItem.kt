@@ -7,17 +7,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.example.edu_vk.model.AppInfo
+import com.example.edu_vk.domain.model.App
+import com.example.edu_vk.presentation.mapper.getIconByName
 
 @Composable
 fun AppListItem(
-    app: AppInfo,
+    app: App,
     onClick: () -> Unit,
 ) {
     ListItem(
         leadingContent = {
             Icon(
-                imageVector = app.icon,
+                imageVector = getIconByName(app.iconName),
                 contentDescription = app.name,
                 modifier = Modifier.size(40.dp),
                 tint = MaterialTheme.colorScheme.primary
@@ -27,7 +28,6 @@ fun AppListItem(
         supportingContent = {
             Column {
                 Text(
-                    // TODO: text !!!
                     text = app.shortDescription,
                     style = MaterialTheme.typography.bodyMedium,
                     maxLines = 2,

@@ -2,8 +2,7 @@ package com.example.edu_vk.presentation.appdetails
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.edu_vk.data.samplesApp
-import com.example.edu_vk.model.*
+import com.example.edu_vk.domain.repository.AppRepositoryImpl
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -19,6 +18,8 @@ class AppDetailsViewModel : ViewModel() {
 
     private var currentAppId: Int? = null
 
+    private val repo = AppRepositoryImpl()
+
     fun load(appId: Int) {
         if (currentAppId == appId && _state.value is AppDetailsState.Content) return
 
@@ -28,24 +29,12 @@ class AppDetailsViewModel : ViewModel() {
         viewModelScope.launch {
             delay(3.seconds)
 
-            val allApps = (samplesApp + showcaseApps).distinctBy { it.id }
-            val currentApp = allApps.find { it.id == appId }
+            val app = repo.getAppById(appId)
 
-            if (currentApp != null) {
+            if (app != null) {
                 _state.value = AppDetailsState.Content(
-                    appDetails = AppDetails(
-                        id = currentApp.id,
-                        name = currentApp.name,
-                        developer = "Someone",
-                        shortDescription = currentApp.shortDescription,
-                        fullDescription = currentApp.fullDescription,
-                        icon = currentApp.icon,
-                        category = currentApp.category,
-                        ageRating = currentApp.ageRating,
-                        size = currentApp.size,
-                    ),
+                    appDetails = app,
                     descriptionCollapsed = true,
-                    similarApps = emptyList()
                 )
             } else {
                 _state.value = AppDetailsState.Error

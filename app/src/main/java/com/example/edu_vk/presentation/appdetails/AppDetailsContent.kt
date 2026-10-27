@@ -6,8 +6,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.edu_vk.model.SimilarApp
-
 @Composable
 fun AppDetailsContent(
     content: AppDetailsState.Content,
@@ -17,7 +15,6 @@ fun AppDetailsContent(
     onReadMoreClick: () -> Unit,
     onDeveloperClick: () -> Unit,
     onShowcaseAppClick: (Int) -> Unit,
-    onSimilarAppDownloadClick: (SimilarApp) -> Unit,
     onLogoClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {

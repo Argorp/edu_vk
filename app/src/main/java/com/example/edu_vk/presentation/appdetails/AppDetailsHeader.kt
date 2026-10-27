@@ -13,14 +13,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.edu_vk.R
-import com.example.edu_vk.model.AppDetails
 import com.example.edu_vk.domain.model.Category
 import kotlin.math.roundToInt
 import androidx.compose.foundation.clickable
+import com.example.edu_vk.domain.model.App
+import com.example.edu_vk.presentation.mapper.getIconByName
 
 @Composable
 fun AppDetailsHeader(
-    appDetails: AppDetails,
+    appDetails: App,
     modifier: Modifier = Modifier,
     onLogoClick: () -> Unit,
 ) {
@@ -30,7 +31,7 @@ fun AppDetailsHeader(
     ) {
 
         Icon(
-            imageVector = appDetails.icon,
+            imageVector = getIconByName(appDetails.iconName),
             contentDescription = appDetails.name,
             modifier = Modifier.size(100.dp).clickable(onClick = onLogoClick)
         )
