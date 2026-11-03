@@ -2,13 +2,18 @@ package com.example.edu_vk.presentation.appdetails
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.edu_vk.domain.repository.AppRepositoryImpl
+import com.example.edu_vk.domain.repository.AppRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import kotlin.time.Duration.Companion.seconds
 
-class AppDetailsViewModel : ViewModel() {
+@HiltViewModel
+class AppDetailsViewModel @Inject constructor(
+    private val repo: AppRepository
+): ViewModel() {
 
     private val _state = MutableStateFlow<AppDetailsState>(AppDetailsState.Loading)
     val state: StateFlow<AppDetailsState> = _state.asStateFlow()
@@ -17,8 +22,6 @@ class AppDetailsViewModel : ViewModel() {
     val events: SharedFlow<AppDetailsEvent> = _events.asSharedFlow()
 
     private var currentAppId: Int? = null
-
-    private val repo = AppRepositoryImpl()
 
     fun load(appId: Int) {
         if (currentAppId == appId && _state.value is AppDetailsState.Content) return

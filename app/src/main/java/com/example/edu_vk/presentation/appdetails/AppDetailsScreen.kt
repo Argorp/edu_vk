@@ -7,14 +7,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
 fun AppDetailsScreen(
     appId: Int,
     onBackClick: () -> Unit,
     onShowcaseAppClick: (Int) -> Unit,
-    viewModel: AppDetailsViewModel = viewModel()
+    viewModel: AppDetailsViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
 

@@ -3,13 +3,16 @@ package com.example.edu_vk.presentation.applist
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.edu_vk.domain.model.App
-import com.example.edu_vk.domain.repository.AppRepositoryImpl
+import com.example.edu_vk.domain.repository.AppRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AppListViewModel : ViewModel() {
-
-    private val repo = AppRepositoryImpl()
+@HiltViewModel
+class AppListViewModel @Inject constructor(
+    private val repo: AppRepository
+): ViewModel() {
 
     private val _apps = MutableStateFlow<List<App>>(emptyList())
     val apps: StateFlow<List<App>> = _apps.asStateFlow()
