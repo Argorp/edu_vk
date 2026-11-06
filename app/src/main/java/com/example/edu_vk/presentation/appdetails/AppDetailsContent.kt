@@ -6,15 +6,18 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.edu_vk.domain.model.App
+
 @Composable
 fun AppDetailsContent(
     content: AppDetailsState.Content,
+    showcaseApps: List<App>,
     onBackClick: () -> Unit,
     onShareClick: () -> Unit,
     onInstallClick: () -> Unit,
     onReadMoreClick: () -> Unit,
     onDeveloperClick: () -> Unit,
-    onShowcaseAppClick: (Int) -> Unit,
+    onShowcaseAppClick: (String) -> Unit,
     onLogoClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -29,7 +32,7 @@ fun AppDetailsContent(
 
         Spacer(Modifier.height(8.dp))
         AppDetailsHeader(
-            appDetails = appDetails,
+            app = appDetails,
             modifier = Modifier.padding(horizontal = 16.dp),
             onLogoClick = onLogoClick
         )
@@ -46,6 +49,9 @@ fun AppDetailsContent(
         )
 
         Spacer(Modifier.height(16.dp))
-        ShowcaseBlock(onAppClick = onShowcaseAppClick, modifier = Modifier)
+        ShowcaseBlock(
+            apps = showcaseApps,
+            onAppClick = onShowcaseAppClick,
+            modifier = Modifier)
     }
 }

@@ -11,13 +11,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
 fun AppDetailsScreen(
-    appId: Int,
+    appId: String,
     onBackClick: () -> Unit,
-    onShowcaseAppClick: (Int) -> Unit,
+    onShowcaseAppClick: (String) -> Unit,
     viewModel: AppDetailsViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-
+    val showcaseApps by viewModel.showcaseApps.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(appId) {
@@ -58,6 +58,7 @@ fun AppDetailsScreen(
             is AppDetailsState.Content -> {
                 AppDetailsContent(
                     content = currentState,
+                    showcaseApps = showcaseApps,
                     onBackClick = onBackClick,
                     onShareClick = { },
                     onInstallClick = { },

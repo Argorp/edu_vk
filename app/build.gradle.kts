@@ -59,6 +59,14 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
+    // Retrofit (Сеть)
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
+    // Coil (Загрузка картинок из сети)
+    implementation("io.coil-kt:coil-compose:2.6.0")
+
     // Hilt
     implementation("com.google.dagger:hilt-android:2.57")
     ksp("com.google.dagger:hilt-compiler:2.57")

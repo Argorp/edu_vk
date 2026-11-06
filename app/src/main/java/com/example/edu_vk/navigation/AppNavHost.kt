@@ -26,10 +26,10 @@ fun AppNavHost(navController: NavHostController) {
         composable(
             route = Screen.AppDetails.route,
             arguments = listOf(
-                navArgument("appId") { type = NavType.IntType },
+                navArgument("appId") { type = NavType.StringType },
             ),
         ) { entry ->
-            val appId = entry.arguments?.getInt("appId") ?: 0
+            val appId = entry.arguments?.getString("appId") ?: ""
             AppDetailsScreen(
                 appId = appId,
                 onBackClick = { navController.popBackStack(

@@ -1,7 +1,7 @@
 package com.example.edu_vk.domain.model
 
 data class App (
-    val id: Int,
+    val id: String,
     val name: String,
     val developer: String,
     val shortDescription: String,
@@ -9,5 +9,5 @@ data class App (
     val category: Category,
     val ageRating: Int,
     val size: Float,
-    val iconName: String
+    val iconUrl: String
 )

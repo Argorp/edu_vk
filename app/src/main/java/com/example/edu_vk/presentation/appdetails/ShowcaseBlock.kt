@@ -9,16 +9,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.edu_vk.domain.model.App
 import com.example.edu_vk.presentation.applist.AppListItem
 
 @Composable
 fun ShowcaseBlock (
-    onAppClick: (Int) -> Unit,
+    apps: List<App>,
+    onAppClick: (String) -> Unit,
     modifier: Modifier
 )
 {
+    val pages = apps.chunked(3)
     Column(modifier.fillMaxWidth()) {
-        val pagerState = rememberPagerState(pageCount = {showcasePages.size})
+        val pagerState = rememberPagerState(pageCount = {pages.size})
         HorizontalPager(
             state = pagerState,
             modifier = Modifier.fillMaxWidth()
@@ -29,7 +32,7 @@ fun ShowcaseBlock (
                     .padding(horizontal = 4.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                showcasePages[page].forEach {
+                pages[page].forEach {
                     AppListItem(
                         app = it,
                         onClick = {onAppClick(it.id)}
@@ -43,7 +46,7 @@ fun ShowcaseBlock (
                 .padding(vertical = 12.dp),
             horizontalArrangement = Arrangement.Center
         ) {
-            repeat (showcasePages.size) { ind ->
+            repeat (pages.size) { ind ->
                 val color: Color = if (pagerState.currentPage == ind) {
                     MaterialTheme.colorScheme.primary
                 } else {

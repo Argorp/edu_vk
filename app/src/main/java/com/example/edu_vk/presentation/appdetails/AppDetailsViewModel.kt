@@ -2,6 +2,7 @@ package com.example.edu_vk.presentation.appdetails
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.edu_vk.domain.model.App
 import com.example.edu_vk.domain.repository.AppRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -18,28 +19,32 @@ class AppDetailsViewModel @Inject constructor(
     private val _state = MutableStateFlow<AppDetailsState>(AppDetailsState.Loading)
     val state: StateFlow<AppDetailsState> = _state.asStateFlow()
 
+    private val _showcaseApps = MutableStateFlow<List<App>>(emptyList())
+    val showcaseApps: StateFlow<List<App>> = _showcaseApps.asStateFlow()
+
     private val _events = MutableSharedFlow<AppDetailsEvent>()
     val events: SharedFlow<AppDetailsEvent> = _events.asSharedFlow()
 
-    private var currentAppId: Int? = null
+    private var currentAppId: String? = null
 
-    fun load(appId: Int) {
+    fun load(appId: String) {
         if (currentAppId == appId && _state.value is AppDetailsState.Content) return
 
         currentAppId = appId
         _state.value = AppDetailsState.Loading
 
         viewModelScope.launch {
-            delay(3.seconds)
+            try {
+                val app = repo.getAppById(appId)
+                val allApps = repo.getAllApps()
+                _showcaseApps.value = allApps.take(9)
 
-            val app = repo.getAppById(appId)
-
-            if (app != null) {
-                _state.value = AppDetailsState.Content(
-                    appDetails = app,
-                    descriptionCollapsed = true,
-                )
-            } else {
+                if (app != null) {
+                    _state.value = AppDetailsState.Content(app, descriptionCollapsed = true)
+                } else {
+                    _state.value = AppDetailsState.Error
+                }
+            } catch (e: Exception) {
                 _state.value = AppDetailsState.Error
             }
         }
