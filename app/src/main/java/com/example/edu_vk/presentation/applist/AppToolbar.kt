@@ -1,21 +1,25 @@
-package com.example.edu_vk.ui.theme
+package com.example.edu_vk.presentation.applist
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Apps
+import androidx.compose.material.icons.filled.AppsOutage
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppToolbar() {
+fun AppToolbar(
+    onLogoClick: () -> Unit
+) {
     TopAppBar(
         title = { Text("Список приложений") },
         navigationIcon = {
-            Icon(
-                imageVector = Icons.Default.Apps,
-                contentDescription = "Иконка приложения"
+            IconButton(onLogoClick) {
+                Icon(
+                    imageVector = Icons.Default.AppsOutage,
+                    contentDescription = "Ты всё равно это не увидишь..."
                 )
+            }
         },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primary,

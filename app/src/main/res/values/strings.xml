@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">edu_vk</string>
+    <string name="app_details_age">Возраст</string>
+    <string name="app_details_size">Размер</string>
+    <string name="app_details_description">Описание</string>
+    <string name="app_details_read_more">Больше</string>
 </resources>
