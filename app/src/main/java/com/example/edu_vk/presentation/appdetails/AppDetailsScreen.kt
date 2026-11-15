@@ -61,7 +61,7 @@ fun AppDetailsScreen(
                     showcaseApps = showcaseApps,
                     onBackClick = onBackClick,
                     onShareClick = { },
-                    onInstallClick = { },
+                    onInstallClick = {viewModel.onInstallClick()},
                     onReadMoreClick = { viewModel.expandDescription() },
                     onDeveloperClick = { },
                     onShowcaseAppClick = onShowcaseAppClick,

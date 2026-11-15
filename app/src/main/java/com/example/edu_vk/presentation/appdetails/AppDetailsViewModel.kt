@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.edu_vk.domain.model.App
 import com.example.edu_vk.domain.repository.AppRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -47,6 +49,44 @@ class AppDetailsViewModel @Inject constructor(
             } catch (e: Exception) {
                 _state.value = AppDetailsState.Error
             }
+        }
+    }
+
+    private var installJob: Job? = null
+
+    fun onInstallClick() {
+        val cur_state = _state.value
+        if (cur_state !is AppDetailsState.Content)
+            return
+
+        if (cur_state.installState is InstallState.Installing) {
+            installJob?.cancel()
+            _state.update {
+                if (it is AppDetailsState.Content)
+                    it.copy(installState = InstallState.NotInstalled)
+                else
+                    it
+            }
+        } else {
+            installJob = viewModelScope.launch {
+                emulateInstall()
+            }
+        }
+    }
+
+    private suspend fun emulateInstall() {
+        try {
+            for (progress in 0..100 step 5) {
+                _state.update {
+                    if (it is AppDetailsState.Content)
+                        it.copy(installState = InstallState.Installing(progress))
+                    else
+                        it
+                }
+                delay(duration = 3.seconds)
+            }
+        } catch (e: CancellationException) {
+            throw e
         }
     }
 
