@@ -35,7 +35,7 @@ fun ShowcaseBlock (
                 pages[page].forEach {
                     AppListItem(
                         app = it,
-                        onClick = {onAppClick(it.id)}
+                        onClick = { onAppClick(it.id) }
                     )
                 }
             }

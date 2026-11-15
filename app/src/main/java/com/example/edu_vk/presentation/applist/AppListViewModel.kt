@@ -17,7 +17,7 @@ sealed interface AppListState {
 
 @HiltViewModel
 class AppListViewModel @Inject constructor(
-    private val repository: AppRepository,
+    private val repo: AppRepository,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<AppListState>(AppListState.Loading)
@@ -25,6 +25,34 @@ class AppListViewModel @Inject constructor(
 
     private val _events = MutableSharedFlow<AppListEvent>()
     val events: SharedFlow<AppListEvent> = _events.asSharedFlow()
+
+
+    private val _ratings = MutableStateFlow<Map<String, Float>>(emptyMap())
+    val ratings: StateFlow<Map<String, Float>> = _ratings.asStateFlow()
+
+    private val _benchmarkResult = MutableStateFlow<String?>(null)
+    val benchmarkResult: StateFlow<String?> = _benchmarkResult.asStateFlow()
+
+    fun testPoslepovatelno(apps: List<App>) {
+        viewModelScope.launch {
+            _benchmarkResult.value = "Загрузка (последовательно) -_- "
+            val ids = apps.map { it.id }
+            val (result, time) = repo.Poslepovatelno(ids)
+            _ratings.value = result
+            _benchmarkResult.value = "Итого последовательно: $time мс"
+        }
+    }
+
+    fun testPrallelno(apps: List<App>) {
+        viewModelScope.launch {
+            _benchmarkResult.value = "Загрузка (параллельно) ;) "
+            val ids = apps.map { it.id }
+            val (result, time) = repo.Prallelno(ids)
+            _ratings.value = result
+            _benchmarkResult.value = "Параллельно: $time мс"
+        }
+    }
+
 
     init {
         loadCatalog()
@@ -34,7 +62,7 @@ class AppListViewModel @Inject constructor(
         viewModelScope.launch {
             _state.value = AppListState.Loading
             try {
-                val apps = repository.getAllApps()
+                val apps = repo.getAllApps()
                 _state.value = AppListState.Content(apps)
             } catch (e: Exception) {
                 android.util.Log.e("NETWORK_ERROR", "Нет доступа в Интернет", e)
