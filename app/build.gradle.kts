@@ -72,6 +72,12 @@ dependencies {
     ksp("com.google.dagger:hilt-compiler:2.57")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
+    // Test
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("io.mockk:mockk:1.13.10")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
+    testImplementation("com.google.truth:truth:1.4.2")
+
     implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.navigation:navigation-compose:2.10.2")
 }
